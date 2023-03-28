@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fastify/express": "^2.3.0",
+    "@fastify/middie": "^8.1.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0",
     "sequelize": "^6.30.0",
