@@ -1,4 +1,4 @@
-import User from "@/app/models/User";
+import User from '@/app/models/User';
 
 class UserService {
   async create(data) {
