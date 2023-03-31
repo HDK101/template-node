@@ -1,10 +1,8 @@
-import User from '../models/User';
+import UserService from '../services/User/UserService';
 
 class UserController {
-  static async index(ctx) {
-  }
-
   static async store(ctx) {
+    ctx.body = await UserService.create(ctx.request.body);
   }
 }
 
