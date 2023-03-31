@@ -1,34 +1,20 @@
-import fastify from 'fastify';
+import Koa from 'koa';
 import dotenv from 'dotenv';
-import { fastifyMiddie } from '@fastify/middie';
+import CSRF from 'koa-csrf';
 
-import routes from './routes';
 import sync from './database/sync';
-
-const app = fastify({
-  logger: true,
-});
+import routes from './routes';
 
 async function start() {
   dotenv.config();
 
   await sync();
 
-  await app.register(fastifyMiddie, {
-    hook: 'onRequest',
-  });
+  const app = new Koa();
 
-  app.use((req, res, next) => {
-    console.log('hello');
-    next();
-  });
-
-  try {
-    app.register(routes);
-    await app.listen({ port: 3000 });
-  } catch (err) {
-    console.error(err);
-  }
+  app
+    .use(new CSRF())
+    .use(routes);
 }
 
 start();

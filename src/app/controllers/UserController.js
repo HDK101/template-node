@@ -1,18 +1,11 @@
 import User from '../models/User';
 
 class UserController {
-  async index(req, res) {
-    return {
-      hello: 'world',
-    };
+  static async index(ctx) {
   }
 
-  async store(req, res) {
-    return User.create({
-      id: 1,
-      name: 'Walter',
-    });
+  static async store(ctx) {
   }
 }
 
-export default new UserController();
+export default UserController;
