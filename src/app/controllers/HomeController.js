@@ -1,6 +1,7 @@
 class HomeController {
   static async index(ctx) {
-    return ctx.render('home');
+    ctx.session.name = 'Max';
+    return ctx.view('home');
   }
 }
 

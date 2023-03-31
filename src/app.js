@@ -30,11 +30,16 @@ async function start() {
 
   app
     .use(async (ctx, next) => {
-      ctx.cookies.set('SameSite', 'Strict');
+      ctx.view = async (template, data) => ctx.render(template, {
+        data,
+        session: ctx.session,
+      });
       await next();
     })
     .use(koaBody())
-    .use(session({}, app))
+    .use(session({
+      sameSite: 'strict',
+    }, app))
     .use(new CSRF())
     .use(routes);
 
