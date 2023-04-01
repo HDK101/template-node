@@ -20,7 +20,8 @@
     "koa-csrf": "^5.0.1",
     "koa-session": "^6.4.0",
     "sequelize": "^6.30.0",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
