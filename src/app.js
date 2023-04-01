@@ -1,5 +1,4 @@
 import Koa from 'koa';
-import CSRF from 'koa-csrf';
 import session from 'koa-session';
 import koaBody from 'koa-body';
 import koaEjs from '@koa/ejs';
@@ -30,9 +29,15 @@ async function start() {
 
   app
     .use(async (ctx, next) => {
+      ctx.formErrors = ctx.session.formErrors;
+      ctx.session.formErrors = {};
+      await next();
+    })
+    .use(async (ctx, next) => {
       ctx.view = async (template, data) => ctx.render(template, {
         data,
         session: ctx.session,
+        formErrors: ctx.formErrors,
       });
       await next();
     })
@@ -40,7 +45,6 @@ async function start() {
     .use(session({
       sameSite: 'strict',
     }, app))
-    .use(new CSRF())
     .use(routes);
 
   app.listen(3000);
